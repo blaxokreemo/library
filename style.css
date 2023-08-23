@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'forumregular';
+    src: url('forum-regular-webfont.woff2') format('woff2'),
+         url('forum-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    margin: 1px;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    grid-template-columns: 300px auto;
+    gap: 6px;
+    height: 100vh;
+    width: 100%;
+    background-color: #e2d1e7;
+}
+
+.header,
+.sidebar,
+.main-content {
+    background-color: #171418;
+    border-radius: 8px;
+}
+
+.header {
+    grid-area: 1 / 1 / 2 / 3;
+    font-family: 'forumregular';
+    color: #e2d1e7;
+    display: flex;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: calc(3rem + 1vh);
+    margin-left: 75px;
+}
+
+.sidebar {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.main-content {
+    grid-area: 2 / 2 / 3 / 3;
+}
