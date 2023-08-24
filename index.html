@@ -22,7 +22,43 @@
             <h1>The Library</h1>
         </div>
 
-        <div class="sidebar"></div>
+        <div class="sidebar">
+            <form action="post" class="new-book-form">
+
+                <div class="formflex">
+                    <h1>New Book</h1>
+                    <label for="title">
+                        Title
+                        <input type="text" name="title" id="title" class="title keyboard-input">
+                    </label>
+                    <label for="author">
+                        Author
+                        <input type="text" name="author" id="author" class="author keyboard-input">
+                    </label>
+                    <label for="pages">
+                        # of Pages
+                        <input type="number" name="pages" id="pages" class="pages keyboard-input">
+                    </label>
+                    <fieldset>
+                        <legend>Have you read this book yet?</legend>
+                        <ul>
+                            <li>
+                                <label for="read">
+                                    <input type="radio" name="read" id="read" value="true">
+                                    Read
+                                </label>
+                            </li>
+                            <li>
+                                <label for="unread">
+                                    <input type="radio" name="read" id="unread" value="false" checked>
+                                    Unread
+                                </label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
         
         <div class="main-content">
 
