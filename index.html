@@ -23,7 +23,7 @@
         </div>
 
         <div class="sidebar">
-            <form action="post" class="new-book-form">
+            <form class="new-book-form" id="new-book-form">
 
                 <div class="formflex">
                     <h1>New Book</h1>
@@ -44,18 +44,19 @@
                         <ul>
                             <li>
                                 <label for="read">
-                                    <input type="radio" name="read" id="read" value="true">
+                                    <input type="radio" name="read" id="read" value="read">
                                     Read
                                 </label>
                             </li>
                             <li>
                                 <label for="unread">
-                                    <input type="radio" name="read" id="unread" value="false" checked>
+                                    <input type="radio" name="read" id="unread" value="unread" checked>
                                     Unread
                                 </label>
                             </li>
                         </ul>
                     </fieldset>
+                    <button class="btn new-book-submit" type="submit">Add to Library</button>
                 </div>
             </form>
         </div>
@@ -63,13 +64,13 @@
         <div class="main-content">
 
             <div class="controls"></div>
-            <div class="library">
-                <div class="div book"></div>
-                <div class="div book"></div>
-                <div class="div book"></div>
-                <div class="div book"></div>
-                <div class="div book"></div>
-                <div class="div book"></div>
+            <div id="library">
+                <div class="book"></div>
+                <div class="book"></div>
+                <div class="book"></div>
+                <div class="book"></div>
+                <div class="book"></div>
+                <div class="book"></div>
             </div>
 
         </div>
