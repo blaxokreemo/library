@@ -212,3 +212,9 @@ input[type=radio] {
     margin: 2px;
     text-align: center;
 }
+
+.book .remove-button {
+    background-color: #171418;
+    color: #e2d1e7;
+    margin-bottom: 10px;
+}

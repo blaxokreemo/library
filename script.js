@@ -34,14 +34,7 @@ form.addEventListener('submit', function (event) {
     form.elements['author'].value = '';
     form.elements['pages'].value = '';
 
-    let bookCards = library.querySelectorAll('.book');
-    bookCards.forEach((card) => {
-        library.removeChild(card);
-    })
-
-    myLibrary.forEach((book) => {
-        createBookCard(book);
-    })
+    populateBooks();
 
 })
 
@@ -51,7 +44,7 @@ function newBookTest(title, author, pages, read) {
     console.log(myLibrary);
 }
 
-function createBookCard(bookObject) {
+function createBookCard(bookObject, indexNumber) {
 
     let newBookCard = document.createElement('div');
     newBookCard.classList.add('book');
@@ -72,12 +65,40 @@ function createBookCard(bookObject) {
     readHeader.classList.add('read-header');
     readHeader.textContent = bookObject['read'];
 
+    let removeButton = document.createElement('button');
+    removeButton.classList.add('remove-button', 'btn');
+    removeButton.setAttribute('type', 'button');
+    removeButton.setAttribute('data-index', `${indexNumber}`);
+    removeButton.textContent = 'Remove Book';
+
     newBookCard.appendChild(titleHeader);
     newBookCard.appendChild(authorHeader);
     newBookCard.appendChild(pagesHeader);
     newBookCard.appendChild(readHeader);
+    newBookCard.appendChild(removeButton);
     
     library.appendChild(newBookCard);
+}
 
+function populateBooks() {
+    let bookCards = library.querySelectorAll('.book');
+    bookCards.forEach((card) => {
+        library.removeChild(card);
+    })
 
+    myLibrary.forEach((book, index) => {
+        createBookCard(book, index);
+    })
+
+    let removeButtons = library.querySelectorAll('.remove-button');
+
+    removeButtons.forEach((button) => {
+        button.addEventListener('click', removeBook)
+    })
+}
+
+function removeBook(e) {
+    let index = e.target.getAttribute('data-index');
+    myLibrary.splice(index, 1);
+    populateBooks();
 }
