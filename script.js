@@ -1,22 +1,9 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
-    // the constructor
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-
-function addBookToLibrary(book) {
-    // do stuff here
-    myLibrary.push(book);
-}
-
-
 const form = document.getElementById('new-book-form');
 const library = document.getElementById('library');
+
+// ---------------FORM EVENT LISTENER---------------- //
 
 form.addEventListener('submit', function (event) {
 
@@ -38,10 +25,19 @@ form.addEventListener('submit', function (event) {
 
 })
 
-function newBookTest(title, author, pages, read) {
-    const newBook = new Book(title, author, pages, read);
-    addBookToLibrary(newBook);
-    console.log(myLibrary);
+// ----------LIBRARY CREATION AND DISPLAY-----------//
+
+function Book(title, author, pages, read) {
+    // the constructor
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+}
+
+function addBookToLibrary(book) {
+    // do stuff here
+    myLibrary.push(book);
 }
 
 function createBookCard(bookObject, indexNumber) {
@@ -65,17 +61,33 @@ function createBookCard(bookObject, indexNumber) {
     readHeader.classList.add('read-header');
     readHeader.textContent = bookObject['read'];
 
+    let buttonsDiv = document.createElement('div');
+    buttonsDiv.classList.add('.button-panel');
+
     let removeButton = document.createElement('button');
     removeButton.classList.add('remove-button', 'btn');
     removeButton.setAttribute('type', 'button');
     removeButton.setAttribute('data-index', `${indexNumber}`);
     removeButton.textContent = 'Remove Book';
 
+    let readButton = document.createElement('button');
+    readButton.classList.add('read-button', 'btn');
+    readButton.setAttribute('type', 'button');
+    readButton.setAttribute('data-index', `${indexNumber}`);
+    if (bookObject['read'] == 'unread') {
+        readButton.textContent = 'Change to Read';
+    } else {
+        readButton.textContent = 'Change to Unread';
+    }
+
     newBookCard.appendChild(titleHeader);
     newBookCard.appendChild(authorHeader);
     newBookCard.appendChild(pagesHeader);
     newBookCard.appendChild(readHeader);
-    newBookCard.appendChild(removeButton);
+    newBookCard.appendChild(buttonsDiv);
+
+        buttonsDiv.appendChild(removeButton);
+        buttonsDiv.appendChild(readButton);
     
     library.appendChild(newBookCard);
 }
@@ -95,10 +107,32 @@ function populateBooks() {
     removeButtons.forEach((button) => {
         button.addEventListener('click', removeBook)
     })
+
+    let readButtons = library.querySelectorAll('.read-button');
+
+    readButtons.forEach((button) => {
+        button.addEventListener('click', toggleRead)
+    })
 }
+
+// ------------_REMOVE BOOK ---------------- //
 
 function removeBook(e) {
     let index = e.target.getAttribute('data-index');
     myLibrary.splice(index, 1);
+    populateBooks();
+}
+
+// ------------ TOGGLE READ ----------------- //
+
+function toggleRead (e) {
+    let index = e.target.getAttribute('data-index');
+    let currentBook = myLibrary[index];
+    if (currentBook['read'] == 'read') {
+        currentBook['read'] = 'unread';
+    } else {
+        currentBook['read'] = 'read';
+    }
+
     populateBooks();
 }
